@@ -1,0 +1,31 @@
+CREATE TABLE tbl_user
+(
+  id_user INT NOT NULL,
+  username VARCHAR(30) NOT NULL,
+  password VARCHAR(40) NOT NULL,
+  foto_user VARCHAR(50) NOT NULL,
+  nama_user VARCHAR(30) NOT NULL,
+  jabatan_user VARCHAR(30) NOT NULL,
+  PRIMARY KEY (id_user),
+  UNIQUE (username)
+);
+
+CREATE TABLE tbl_barang
+(
+  kode_barang CHAR(8) NOT NULL,
+  nama_barang VARCHAR(30) NOT NULL,
+  satuan_barang VARCHAR(30) NOT NULL,
+  PRIMARY KEY (kode_barang)
+);
+
+CREATE TABLE tbl_stok
+(
+  id_stok INT NOT NULL,
+  tanggal_stok DATE NOT NULL,
+  akhir_stok INT NOT NULL,
+  penjualan_stok INT NOT NULL,
+  persediaan_stok INT NOT NULL,
+  kode_barang CHAR(8) NOT NULL,
+  PRIMARY KEY (id_stok),
+  FOREIGN KEY (kode_barang) REFERENCES tbl_barang(kode_barang)
+);
