@@ -26,7 +26,7 @@ class Barang extends CI_Controller {
 	{
 		$table = "
         (
-          select * from tbl_barang order by nama_barang ASC
+          select * from tbl_stok order by nama_barang ASC
         )temp";
 		
         $primaryKey = 'kode_barang';
@@ -49,7 +49,6 @@ class Barang extends CI_Controller {
 	}	
 	public function barang_tambah()
     {
-		$_POST['username_eksis'] = "0";
 		$this->load->view("v_admin_header");
         $this->load->view("v_barang_add", $_POST);
 		$this->load->view("v_main_footer");
@@ -58,26 +57,20 @@ class Barang extends CI_Controller {
 	{
 		if($kode_barang!=""){
 			$where = array("kode_barang" => $kode_barang);
-			$data['tbl_barang'] = $this->m_general->view_by("tbl_barang",$where);
+			$data['tbl_stok'] = $this->m_general->view_by("tbl_stok",$where);
 			$this->load->view("v_admin_header");
 			$this->load->view('v_barang_edit', $data);
 			$this->load->view("v_main_footer");
 		}else{
-			redirect('barang');
+			redirect('stok');
 		}
 	}
 	public function barang_aksi_tambah()
     {
-		$kode_barang = $this->m_general->countdata("tbl_barang", array("kode_barang" => $_POST['kode_barang']));
-		if($kode_barang=="0"){
-			$this->m_general->add("tbl_barang", $_POST);
-			redirect('barang');
-		}else{
-			$_POST['kode_barang_eksis'] = "1";
-			$this->load->view("v_admin_header");
-			$this->load->view("v_barang_add", $_POST);
-			$this->load->view("v_main_footer");
-		}
+		$id_terakhir = $this->m_general->bacaidterakhir("tbl_stok", "id_stok");
+		$_POST['id_stok'] = $id_terakhir;
+		$this->m_general->add("tbl_stok", $_POST);
+		redirect('stok');
     }	
 	public function barang_aksi_ubah()
     {
@@ -88,33 +81,33 @@ class Barang extends CI_Controller {
 			$_POST['kode_barang'] = $kode_barang;	
 			
 			if($kode_barang!=$kode_barang_old){
-				$check_kode_barang = $this->m_general->countdata("tbl_barang", array("kode_barang" => $kode_barang));
+				$check_kode_barang = $this->m_general->countdata("tbl_stok", array("kode_barang" => $kode_barang));
 			}else{
 				$check_kode_barang = 0;
 			}
 			
 			if($check_kode_barang==0){
 							
-				$this->m_general->edit("tbl_barang", $where, $_POST);
-				redirect('barang');
+				$this->m_general->edit("tbl_stok", $where, $_POST);
+				redirect('stok');
 			}else{
 				$_POST['kode_barang_eksis'] = "1";
-				$_POST['tbl_barang'] = $this->m_general->view_by("tbl_barang",$where);
+				$_POST['tbl_stok'] = $this->m_general->view_by("tbl_stok",$where);
 				$this->load->view("v_admin_header");
 				$this->load->view("v_barang_edit", $_POST);
 				$this->load->view("v_main_footer");
 			}
 		}else{
-			redirect('barang/barang_ubah/');
+			redirect('stok/barang_ubah/');
 		}
     }	
 	public function barang_aksi_hapus($kode_barang=""){
 		if($kode_barang!=""){
 			$where['kode_barang'] = $kode_barang;
-			$this->m_general->hapus("tbl_barang", $where);
-			redirect('barang');
+			$this->m_general->hapus("tbl_stok", $where);
+			redirect('stok');
 		}else{
-			redirect('barang');
+			redirect('stok');
 		}
 	}
 }

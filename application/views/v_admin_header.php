@@ -35,6 +35,7 @@
   $profile = "";
   $user = "";
   $barang = "";
+  $stok = "";
   
   if($geturl1=="admin" && ($geturl2=="" or strpos($geturl2, "index")!== FALSE)){
 	  $profile = "active";
@@ -48,6 +49,9 @@
   if(strpos($geturl1, "barang")!== FALSE){
 	  $barang = "active";
   }
+  if(strpos($geturl1, "stok")!== FALSE){
+	  $stok = "active";
+  }
 ?>
 <div id="layoutSidenav">
 	 <div id="layoutSidenav_nav">
@@ -59,10 +63,13 @@
                                 Profile</a>
 							<a class="nav-link <?php echo $user;?>" href="<?php echo base_url(); ?>user"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                                User</a>
+                                Data User</a>
 							<a class="nav-link <?php echo $barang;?>" href="<?php echo base_url(); ?>barang"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Barang</a>
+                                Data Barang</a>
+							<a class="nav-link <?php echo $stok;?>" href="<?php echo base_url(); ?>stok"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Data Stok Barang</a>
 							<a class="nav-link" href="<?php echo base_url(); ?>login/logout"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-sign-out"></i></div>
                                 Logout</a>
