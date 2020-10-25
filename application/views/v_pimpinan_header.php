@@ -33,22 +33,14 @@
   $geturl1 = $this->uri->segment(1);
   $geturl2 = $this->uri->segment(2);
   $profile = "";
-  $user = "";
-  $barang = "";
   $stok = "";
   $analisis = "";
   
-  if($geturl1=="admin" && ($geturl2=="" or strpos($geturl2, "index")!== FALSE)){
+  if($geturl1=="pimpinan" && ($geturl2=="" or strpos($geturl2, "index")!== FALSE)){
 	  $profile = "active";
   }
   if(strpos($geturl1, "profile")!== FALSE){
 	  $profile = "active";
-  }
-  if(strpos($geturl1, "user")!== FALSE){
-	  $user = "active";
-  }
-  if(strpos($geturl1, "barang")!== FALSE){
-	  $barang = "active";
   }
   if(strpos($geturl1, "stok")!== FALSE){
 	  $stok = "active";
@@ -62,15 +54,9 @@
                 <nav class="sb-sidenav accordion sb-sidenav-light " id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <a class="nav-link <?php echo $profile;?>" href="<?php echo base_url(); ?>admin"
+                            <a class="nav-link <?php echo $profile;?>" href="<?php echo base_url(); ?>pimpinan"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                                 Profile</a>
-							<a class="nav-link <?php echo $user;?>" href="<?php echo base_url(); ?>user"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                                Data User</a>
-							<a class="nav-link <?php echo $barang;?>" href="<?php echo base_url(); ?>barang"
-                                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Data Barang</a>
 							<a class="nav-link <?php echo $stok;?>" href="<?php echo base_url(); ?>stok"
                                 ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Data Stok Barang</a>

@@ -1,12 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Pimpinan extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		if($this->session->userdata('status') != "login" or 
-		 $this->session->userdata('jabatan_user') != "admin"){
+		if($this->session->userdata('status') != "login" and $this->session->userdata('jabatan_user') != "pimpinan"){
 			redirect(base_url("login"));
 		}
 		date_default_timezone_set("Asia/Bangkok");
@@ -15,7 +14,7 @@ class Admin extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('v_admin_header');
+		$this->load->view('v_pimpinan_header');
 		$this->load->view('v_index');
 		$this->load->view('v_main_footer');
 	}

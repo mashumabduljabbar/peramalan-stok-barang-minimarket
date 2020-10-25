@@ -28,6 +28,10 @@ class M_general extends CI_Model {
 		return $this->db->get($table)->row();
 	}
 	
+	public function view_where($table, $where =""){
+		$this->db->where($where);
+		return $this->db->get($table)->result();
+	}
 	public function view_order($table, $order =""){
 		$this->db->order_by($order);
 		return $this->db->get($table)->result();

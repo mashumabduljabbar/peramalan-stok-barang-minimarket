@@ -12,7 +12,11 @@ class Login extends CI_Controller {
 	public function index()
 	{
 		if($this->session->userdata('status') == "login"){
-			redirect(base_url("admin"));
+			if($this->session->userdata('jabatan_user')=="admin"){	
+				redirect(base_url("admin"));
+			}else if($this->session->userdata('jabatan_user')=="pimpinan"){	
+				redirect(base_url("pimpinan"));	
+			}
 		}
 		$data['hasillogin'] = "";
 		$this->load->view('v_login_index',$data);
@@ -46,7 +50,7 @@ class Login extends CI_Controller {
 				$this->session->set_userdata($data_session);
 			if($tbl_user->jabatan_user=="admin"){	
 				redirect(base_url("admin"));
-			}else{
+			}else if($tbl_user->jabatan_user=="pimpinan"){	
 				redirect(base_url("pimpinan"));	
 			}
 		}else{

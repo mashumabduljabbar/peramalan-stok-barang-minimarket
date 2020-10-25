@@ -2,20 +2,22 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 include APPPATH . 'third_party/ssp.php';
 class Stok extends CI_Controller {
+	var $jabatan ="";
 	public function __construct(){
 		parent::__construct();
-		if($this->session->userdata('status') != "login"  and $this->session->userdata('satuan_stok') != "admin"){
+		if($this->session->userdata('status') != "login"){
 			redirect(base_url("login"));
 		}
 		date_default_timezone_set("Asia/Bangkok");
 		$this->load->model('m_general');
+		$this->jabatan = $this->session->userdata('jabatan_user');
 	}
 	
 	////////////////////////////////////
 	
 	public function index()
     {
-		$this->load->view("v_admin_header");
+		$this->load->view("v_".$this->jabatan."_header");
         $this->load->view("v_stok");
         $this->load->view("v_main_footer");
     }
@@ -57,7 +59,7 @@ order by id_stok ASC
 	public function stok_tambah()
     {
 		$data['tbl_barang'] = $this->m_general->view("tbl_barang");
-		$this->load->view("v_admin_header");
+		$this->load->view("v_".$this->jabatan."_header");
         $this->load->view("v_stok_add", $data);
 		$this->load->view("v_main_footer");
     }
@@ -66,7 +68,7 @@ order by id_stok ASC
 		if($id_stok!=""){
 			$where = array("id_stok" => $id_stok);
 			$data['tbl_stok'] = $this->m_general->view_by("tbl_stok",$where);
-			$this->load->view("v_admin_header");
+			$this->load->view("v_".$this->jabatan."_header");
 			$this->load->view('v_stok_edit', $data);
 			$this->load->view("v_main_footer");
 		}else{
