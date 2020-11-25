@@ -112,7 +112,10 @@ table, th, td{
 
 	$Y = ROUND($b0 + ($b1 * $X1) + ($b2 * $X2),0);
 
-													echo $Y;?>
+													echo $Y;
+													
+													echo " ".$satuan_barang;
+													?>
 													
 													</th>	
 												</tr>
