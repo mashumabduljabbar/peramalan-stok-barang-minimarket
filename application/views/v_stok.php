@@ -4,35 +4,64 @@
 				<main>
                     <div class="container-fluid">
                         <h1 class="mt-4"></h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Stok Barang</li>
-                        </ol>
-                        <div class="card mb-4">
                             <div class="card-header">
 							<label><a class="btn-sm btn-primary nav-link" style="width:200px;" href="<?php echo base_url("stok/stok_tambah");?>"><i class="fa fa-plus"></i> <span>Tambah Stok Barang</span>
 							</a></label>
+							<label><a onclick="printDiv('printableArea')" href="#" class="btn-sm btn-success nav-link" style="width:200px;" ><i class="fa fa-print"></i> <span>Cetak Stok Barang</span>
+							</a></label>
 							</div>
-							<div class="card-body">
-                                <div class="table-responsive">
-                                    
-									<table class="table table-bordered" id="datastok" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Bulan</th>
-                                                <th>Barang</th>
-                                                <th>Stok Akhir</th>
-                                                <th>Penjualan Bulanan</th>
-                                                <th>Persediaan Bulanan</th>
-												<?php if($jabatan_user=="admin"){ ?>
-                                                <th>Action</th>
-												<?php } ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+						<div id="">	
+							<ol class="breadcrumb mb-4">
+								<li class="breadcrumb-item active">Stok Barang</li>
+							</ol>
+							<div class="card mb-4">
+								<div class="card-body">
+									<div class="table-responsive">
+										
+										<table class="table table-bordered" id="datastok" width="100%" cellspacing="0">
+											<thead>
+												<tr>
+													<th>Bulan</th>
+													<th>Barang</th>
+													<th>Stok Akhir</th>
+													<th>Penjualan Bulanan</th>
+													<th>Persediaan Bulanan</th>
+													<?php if($jabatan_user=="admin"){ ?>
+													<th>Action</th>
+													<?php } ?>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+                        </div>
+						<div id="printableArea">	
+							<ol class="breadcrumb mb-4">
+								<li class="breadcrumb-item active">Stok Barang</li>
+							</ol>
+							<div class="card mb-4">
+								<div class="card-body">
+									<div class="table-responsive">
+										
+										<table class="table table-bordered" id="datastok2" width="100%" cellspacing="0">
+											<thead>
+												<tr>
+													<th>Bulan</th>
+													<th>Barang</th>
+													<th>Stok Akhir</th>
+													<th>Penjualan Bulanan</th>
+													<th>Persediaan Bulanan</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
                         </div>
                     </div>
                 </main>
@@ -40,6 +69,35 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script>
+$('#printableArea').hide();
+$('#datastok2').DataTable({
+			"ajax": "<?php echo base_url('stok/get_data_master_stok/');?>" ,
+			"columns": [
+				{ "data": "bulan" },
+				{ "data": "nama_barang" },
+				{ "data": "akhir_stok" },
+				{ "data": "penjualan_stok" },
+				{ "data": "persediaan_stok" }
+			],
+						
+			columnDefs: [],
+			"lengthMenu": [[-1], ["All"]],	
+			"searching": false,
+			"paging": false,
+			"info": false,
+			});
+function printDiv(divName) {
+     $('#printableArea').show();
+	 var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+
 $(document).ready(function() {
 	
 var jabatan = "<?php echo $jabatan_user;?>";

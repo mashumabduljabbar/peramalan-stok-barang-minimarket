@@ -77,7 +77,7 @@ where kode_barang='$kode_barang'")->row();
 			$tbl_barang = $this->m_general->view_by("tbl_barang", array("kode_barang"=>$kode_barang));
 			$data['nama_barang'] = $tbl_barang->nama_barang;
 			$data['satuan_barang'] = $tbl_barang->satuan_barang;
-		}else{ $data['nama_barang'] = "Pilih Barang"; }
+		}else{ $data['nama_barang'] = "Pilih Barang"; $data['satuan_barang'] = ''; }
 		$url = $this->session->userdata('jabatan_user');
 		$this->load->view("v_".$url."_header");
         $this->load->view("v_analisis",$data);
